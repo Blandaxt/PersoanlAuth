@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dolphin Site</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <!-- required for video player -->
+    <link href="https://vjs.zencdn.net/7.0.5/video-js.css" rel="stylesheet">
+
+ <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+ <script src="http://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+</head>
+<body>
+<div class="container">
+        <!-- multiple if i want the user to upload multiple images -->
+    <div class="page-header text-center">
+        <h1>Welcome,<span>: <%= user.local.email %></span>!</h1>
+        <img src="img/dolphinwave.jpg" alt="Dolphin wave">
+        <h2><span class="fa fa-anchor"></span> Profile Page</h2>
+        <!-- Video Player -->
+          <video id="my-video" class="video-js" controls preload="auto" width="640" height="264"
+          poster="MY_VIDEO_POSTER.jpg" video loop="loop" data-setup='{"controls": true, "autoplay": false, "preload": "auto"}'>
+          <source src="video/dolphins.mp4" type='video/mp4'>
+          <source src="video/dolphins.wmv" type='video/wmv'>
+          <p class="vjs-no-js">
+          To view this video please enable JavaScript, and consider upgrading to a web browser that
+          <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+          </video>
+
+          <script src="https://vjs.zencdn.net/7.0.5/video.js"></script>
+          <!-- video player end -->
+
+        <!-- IMAGE UPLOAD -->
+        <form action="/up" enctype="multipart/form-data" method="post">
+           <input type="file" name="file-to-upload">
+           <input type="submit" value="Upload">
+        </form>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <img src="img/dolphin.jpg" alt="Dolphin under the sea">
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+
+                <% if (user.local.email) { %>
+                    <p>
+                        <strong>id</strong>: <%= user._id %><br>
+                        <strong>email</strong>: <%= user.local.email %><br>
+                        <strong>password</strong>: <%= user.local.password %>
+                    </p>
+
+                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                <% } else { %>
+                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                <% } %>
+
+            </div>
+        </div>
+        <div class="col-sm-6">
+          <h3>Messages</h3>
+          <ul class="messages">
+          <% for(var i=0; i<messages.length; i++) {%>
+            <li class="message">
+              <span><%= messages[i].name %></span>
+              <span><%= messages[i].msg %></span>
+              <input type="datetime" name="" value="">
+              <span><%= messages[i].thumbUp %></span>
+              <span><%= messages[i].thumbDown %></span>
+              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+              <span><i class="fas fa-trash"></i></span>
+            </li>
+          <% } %>
+          </ul>
+
+          <h2>Add a message</h2>
+        <% if (user.local.email) { %>
+          <form action="/messages" method="POST">
+            <input type="text" value="<%= user.local.email %>" name="name">
+            <input type="text" placeholder="message" name="msg">
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+        <% } %>
+
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>

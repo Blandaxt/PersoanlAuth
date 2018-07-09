@@ -1,0 +1,9 @@
+body{
+  padding-top:80px;
+  word-wrap:break-word;
+}
+img{
+  height: 200px;
+  border-radius: 4px;
+  border: 1px solid lightblue;
+}
