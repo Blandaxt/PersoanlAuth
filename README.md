@@ -10,9 +10,13 @@
 
 5. After logging out, the user can log back into their account.
 
+##How it's made:
+
+*Tech Used:* HTML, CSS, JavaScript, Node.js, Express, and Passport.js
+
 ## Optimization:
 
-If i had more time, i would include better CSS styling to my template engine files. I would also include a date and time for each comment posted. i would so add and icon for each user so that they can have a bit more identification when posting a comment. 
+If i had more time, i would include better CSS styling to my template engine files. I would also include a date and time for each comment posted. i would so add and icon for each user so that they can have a bit more identification when posting a comment.
 
 ## Installation
 
